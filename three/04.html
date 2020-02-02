@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <style>
+      .ball {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <input type="button" value="快到碗里来" @click="flag=!flag" />
+      <!-- 1. 使用 transition 元素把 小球包裹起来 -->
+      <transition
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @after-enter="afterEnter"
+      >
+        <div class="ball" v-show="flag"></div>
+      </transition>
+    </div>
+
+    <script>
+      // 创建 Vue 实例，得到 ViewModel
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          flag: false
+        },
+        methods: {
+          beforeEnter(el) {
+            // 设置小球开始动画之前的，起始位置
+            el.style.transform = "translate(0, 0)";
+          },
+          enter(el, done) {
+            // 这句话，没有实际的作用，但是，如果不写，出不来动画效果；
+            // 可以认为 el.offsetWidth 会强制动画刷新
+            el.offsetWidth;
+            el.style.transform = "translate(150px, 450px)";
+            el.style.transition = "all 1s ease";
+            done();
+          },
+          afterEnter(el) {
+            // console.log('ok')
+            this.flag = !this.flag;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

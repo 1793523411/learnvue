@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="button" value="go" @click="lang" />
+      <input type="button" value="down" @click="stop" />
+      <h4>{{ msg }}</h4>
+    </div>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          msg: "I am so happy!!!!!!!!!!!hahahaha",
+          intervalid: null
+        },
+        methods: {
+          lang() {
+            if (this.intervalid != null) return;
+
+            this.intervalid = setInterval(() => {
+              var start = this.msg.substring(0, 1);
+              var end = this.msg.substring(1);
+              this.msg = end + start;// 在data上定义 定时器Id
+            }, 50);
+          },
+          stop() {
+            clearInterval(this.intervalid);
+            this.intervalid = null;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

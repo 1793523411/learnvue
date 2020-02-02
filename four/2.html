@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <com1 v-bind:parentmsg="msg"></com1>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          msg: "123 啊-父组件中的数据"
+        },
+        methods: {},
+
+        components: {
+          com1: {
+            data() {
+              return {
+                title: "123",
+                content: "qqq"
+              };
+            },
+            template: '<h1 @click="change">这是子组件 --- {{ parentmsg }}</h1>',
+
+            props: ["parentmsg"],
+            directives: {},
+            filters: {},
+            components: {},
+            methods: {
+              change() {
+                this.parentmsg = "被修改了";
+              }
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

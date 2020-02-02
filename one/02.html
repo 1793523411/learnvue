@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 往页面显示data中的数据和执行函数 -->
+    <div id="app">
+      <p v-cloak>++++++++{{ msg }}++++++</p>
+      <!-- <h4 v-text="msg">====++++{{ msg }}++==={{ msg }}==</h4> -->
+      <h4 v-text="msg">=========</h4>
+      <div>{{ msg2 }}</div>
+      <div v-text="msg2"></div>
+      <div v-html="msg2">1111111</div>
+      <input type="button" value="button" v-bind:title="title+'123'" />
+      <input type="button" value="button" :title="title+'123'" />
+      <input
+        type="button"
+        value="按钮"
+        :title="mytitle + '123'"
+        v-on:click="show"
+      />
+      <input type="button" value="button" @click="show" />
+      <input type="button" id="btn" value="DOM实现" />
+    </div>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          msg: "123",
+          msg2: "<h1>why am i so big?</h1>",
+          title: "this is a title"
+        },
+        methods: {
+          show: function() {
+            alert("hello,你好");
+          }
+        }
+      });
+      document.getElementById("btn").onclick = function() {
+        alert("hello");
+      };
+    </script>
+  </body>
+</html>
